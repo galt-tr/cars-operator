@@ -1,0 +1,23 @@
+# permissions for end users to view cars.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: cars-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: cars-viewer-role
+rules:
+- apiGroups:
+  - infra.bsvblockchain.com
+  resources:
+  - cars
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - infra.bsvblockchain.com
+  resources:
+  - cars/status
+  verbs:
+  - get

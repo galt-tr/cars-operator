@@ -1,0 +1,9 @@
+apiVersion: infra.bsvblockchain.com/v1alpha1
+kind: Cars
+metadata:
+  labels:
+    app.kubernetes.io/name: cars-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: cars-sample
+spec:
+  # TODO(user): Add fields here
