@@ -6,4 +6,6 @@ metadata:
     app.kubernetes.io/managed-by: kustomize
   name: cars-sample
 spec:
-  # TODO(user): Add fields here
+  domain: bsvcloudsolutions.com
+  storageClass: do-block-storage
+  clusterIssuer: letsencrypt-prod

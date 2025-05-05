@@ -71,6 +71,7 @@ func defaultCarsDeploymentSpec() *appsv1.DeploymentSpec {
 				Labels:            labels,
 			},
 			Spec: corev1.PodSpec{
+				ServiceAccountName: DefaultServiceAccount,
 				Containers: []corev1.Container{
 					{
 						EnvFrom:         envFrom,

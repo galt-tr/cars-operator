@@ -108,7 +108,9 @@ func (r *CarsReconciler) updateIngress(ingress *networkingv1.Ingress, cars *infr
 
 func defaultCarsIngressSpec(cars *infrav1alpha1.Cars) *networkingv1.IngressSpec {
 	pathType := networkingv1.PathTypeImplementationSpecific
+	class := "nginx"
 	return &networkingv1.IngressSpec{
+		IngressClassName: &class,
 		TLS: []networkingv1.IngressTLS{
 			{
 				Hosts: []string{

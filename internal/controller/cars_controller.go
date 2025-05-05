@@ -48,6 +48,9 @@ type CarsReconciler struct {
 //+kubebuilder:rbac:groups=infra.bsvblockchain.com,resources=cars,verbs=get;list;watch;create;update;patch;delete
 //+kubebuilder:rbac:groups=infra.bsvblockchain.com,resources=cars/status,verbs=get;update;patch
 //+kubebuilder:rbac:groups=infra.bsvblockchain.com,resources=cars/finalizers,verbs=update
+//+kubebuilder:rbac:groups="",resources=endpoints;configmaps;services;secrets;persistentvolumeclaims,verbs=get;create;update;list;watch
+//+kubebuilder:rbac:groups="apps",resources=deployments,verbs=get;update;create;list;watch
+//+kubebuilder:rbac:groups="networking.k8s.io",resources=ingresses,verbs=get;update;create;list;watch
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
