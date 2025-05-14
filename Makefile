@@ -320,3 +320,22 @@ catalog-build: opm ## Build a catalog image.
 .PHONY: catalog-push
 catalog-push: ## Push a catalog image.
 	$(MAKE) docker-push IMG=$(CATALOG_IMG)
+
+# Generate deployment manifests to be used for manual deployment 
+.PHONY: generate-deploy
+generate-deploy: generate-deployment generate-crds generate-rbac
+
+.PHONY: generate-deployment
+generate-deployment: manifests kustomize
+	cd config/manager && $(KUSTOMIZE) edit set image controller=${IMG}
+	$(KUSTOMIZE) build config/default > deploy/manifest.yaml
+
+.PHONY: generate-crds
+generate-crds: manifests kustomize
+	echo "---" > deploy/crds.yaml
+	$(KUSTOMIZE) build config/crd >> deploy/crds.yaml
+
+.PHONY: generate-rbac
+generate-rbac: manifests kustomize
+	echo "---" > deploy/rbac.yaml
+	$(KUSTOMIZE) build config/rbac >> deploy/rbac.yaml
