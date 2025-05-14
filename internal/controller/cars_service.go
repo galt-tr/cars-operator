@@ -114,14 +114,14 @@ func defaultCarsIngressSpec(cars *infrav1alpha1.Cars) *networkingv1.IngressSpec 
 		TLS: []networkingv1.IngressTLS{
 			{
 				Hosts: []string{
-					fmt.Sprintf("cars.%s", cars.Spec.Domain),
+					fmt.Sprintf("%s.%s", cars.Name, cars.Spec.Domain),
 				},
 				SecretName: "cars-tls",
 			},
 		},
 		Rules: []networkingv1.IngressRule{
 			{
-				Host: fmt.Sprintf("%s.%s", cars.Namespace, cars.Spec.Domain),
+				Host: fmt.Sprintf("%s.%s", cars.Name, cars.Spec.Domain),
 				IngressRuleValue: networkingv1.IngressRuleValue{
 					HTTP: &networkingv1.HTTPIngressRuleValue{
 						Paths: []networkingv1.HTTPIngressPath{
