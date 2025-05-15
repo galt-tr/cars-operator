@@ -327,7 +327,7 @@ generate-deploy: generate-deployment generate-crds generate-rbac
 
 .PHONY: generate-deployment
 generate-deployment: manifests kustomize
-	cd config/manager && $(KUSTOMIZE) edit set image controller=${IMG}
+	cd config/manager && $(KUSTOMIZE) edit set image controller=${IMG} && $(KUSTOMIZE) edit set namespace cars-operator-system
 	$(KUSTOMIZE) build config/default > deploy/manifest.yaml
 
 .PHONY: generate-crds
@@ -337,5 +337,6 @@ generate-crds: manifests kustomize
 
 .PHONY: generate-rbac
 generate-rbac: manifests kustomize
+	cd config/rbac && $(KUSTOMIZE) edit set namespace cars-operator-system
 	echo "---" > deploy/rbac.yaml
 	$(KUSTOMIZE) build config/rbac >> deploy/rbac.yaml
